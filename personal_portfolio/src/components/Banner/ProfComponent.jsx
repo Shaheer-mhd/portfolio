@@ -10,7 +10,7 @@ const ProfComponent = () => {
       <Slide direction="left">
         <Texts>
           <h4>
-            Hello <span className="green">I'am</span>
+            Hello <span className="green">I am</span>
           </h4>
           <h1 className="green">Muhammed Shaheer</h1>
           <h3>Software Engineer</h3>
