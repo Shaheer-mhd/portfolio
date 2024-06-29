@@ -4,6 +4,9 @@ import { GiCandleFlame } from "react-icons/gi";
 
 const Header = () => {
     const [bar, setBar] = useState(false);
+    const handleMenuClick = () => {
+        setBar(false)
+    }
   return (
     <Container bar={bar}>
         <Logo>
@@ -11,11 +14,11 @@ const Header = () => {
             <h1>Personal Portfolio</h1>
         </Logo>
         <Nav bar={bar}>
-            <span><a href="#home">Home</a></span>
-            <span><a href="#service">Experience</a></span>
-            <span><a href="#project">Projects</a></span>
-            <span><a href="#client">Skills</a></span>
-            <span><a href="#footer">Portfolio</a></span>
+            <span><a href="#home" onClick={handleMenuClick}>Home</a></span>
+            <span><a href="#service" onClick={handleMenuClick}>Experience</a></span>
+            <span><a href="#project" onClick={handleMenuClick}>Projects</a></span>
+            <span><a href="#client" onClick={handleMenuClick}>Skills</a></span>
+            <span><a href="#footer" onClick={handleMenuClick}>Portfolio</a></span>
         </Nav>
         <div
         onClick={() => setBar(!bar)}

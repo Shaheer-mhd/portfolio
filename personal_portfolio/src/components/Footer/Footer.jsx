@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }  from "react";
 import styled from "styled-components";
 import { MdAlternateEmail } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
@@ -7,6 +7,7 @@ import { AiFillGithub, AiFillLinkedin, AiOutlineArrowUp } from "react-icons/ai";
 import { BsFacebook, BsSlack } from "react-icons/bs";
 import { FiMail, FiPhoneCall } from "react-icons/fi";
 import { Slide, Zoom, Fade } from "react-awesome-reveal";
+import emailjs from 'emailjs-com';
 
 const Footer = () => {
   const scrollUp = () => {
@@ -15,6 +16,39 @@ const Footer = () => {
       behavior: "smooth",
     });
   };
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  }); 
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+        ...formData,
+        [name]: value
+    });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    emailjs.sendForm('service_fzxtu5l', 'template_05bqnmt', e.target, 'aChyzcxW9glOVEJpy')
+        .then((result) => {
+            console.log(result.text);
+            alert("Message sent successfully!");
+        }, (error) => {
+            console.log(error.text);
+            alert("Failed to send the message, please try again.");
+        });
+
+    setFormData({
+        name: '',
+        email: '',
+        message: ''
+    });
+  };
+
   return (
     <Container id="footer">
       <Profile>
@@ -71,7 +105,7 @@ const Footer = () => {
                 </a>
               </span>
             </Zoom>
-            <Zoom>
+            {/* <Zoom>
               <span>
                 <a href="/">
                   <BsFacebook />
@@ -84,7 +118,7 @@ const Footer = () => {
                   <BsSlack />
                 </a>
               </span>
-            </Zoom>
+            </Zoom> */}
           </div>
         </div>
         <Fade>
@@ -95,26 +129,26 @@ const Footer = () => {
       </Profile>
       <Form>
         <Slide direction="right">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="name">
               <span>
                 <CgProfile />
               </span>
-              <input type="text" placeholder="Fullname..." />
+              <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Fullname..." required />
             </div>
             <div className="email">
               <span>
                 <MdAlternateEmail />
               </span>
-              <input type="email" placeholder="Email..." />
+              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email..." required/>
             </div>
             <div className="message">
               <span className="messageIcon">
                 <FiMail />
               </span>
-              <textarea cols="30" rows="10" placeholder="Message..."></textarea>
+              <textarea cols="30" rows="10" name="message" placeholder="Message..." value={formData.message} onChange={handleChange} required ></textarea>
             </div>
-            <button>Submit</button>
+            <button type="submit">Submit</button>
           </form>
         </Slide>
       </Form>

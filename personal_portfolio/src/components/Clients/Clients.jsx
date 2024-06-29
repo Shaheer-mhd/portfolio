@@ -221,16 +221,26 @@ const Testimonials = styled.div`
     position: relative;
 
     .skills {
+        background: rgb(45,45,58);
+        border-radius: 0.7rem;
+        padding: 1rem;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
-        gap: 1rem;
+        gap: 2rem;
         color: #01be96;
         font-weight: bold;
+
+        @media(max-width: 840px) {
+            flex-direction: column; 
+            align-items: center; 
+        }
     }
 
     .iconskill {
         color: white;
         font-size: x-large;
+        padding-left: 15px
     }
 `
 const Buttons = styled.div`
